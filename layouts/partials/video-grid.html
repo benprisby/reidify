@@ -20,7 +20,7 @@
       {{- with $v.published }}
       <p class="video__date">
         <time datetime="{{ . }}">
-          {{- (time.AsTime .).Format "2 January 2006" -}}
+          {{- (time.AsTime .).Format "January 2, 2006" -}}
         </time>
       </p>
       {{- end }}
