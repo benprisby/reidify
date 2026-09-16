@@ -1,0 +1,5 @@
+{{- /* Inlines assets/icons/<name>.svg so it inherits currentColor.
+       TODO: swap the YouTube/TikTok marks for official brand assets. */ -}}
+{{- with resources.Get (printf "icons/%s.svg" .) -}}
+  {{- .Content | safeHTML -}}
+{{- end -}}

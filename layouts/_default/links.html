@@ -1,0 +1,46 @@
+{{- /* Linktree replacement. Full-width stacked buttons, big tap targets,
+       opened on a phone far more often than a desktop. Entries and their
+       button treatment come from content/links.md front matter. */ -}}
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "en-us" }}">
+<head>
+  {{- partial "head.html" . }}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  {{ partial "nav.html" . }}
+
+  <main id="main">
+    <article class="page">
+      <div class="wrap">
+        <h1 class="page__title">{{ .Title }}</h1>
+        {{- with .Content }}
+        <div class="prose">{{ . }}</div>
+        {{- end }}
+
+        <ul class="linkstack">
+          {{- range .Params.links }}
+          <li>
+            {{- $u := .url -}}
+            <a class="linkbtn{{ with .style }} linkbtn--{{ . }}{{ end }}"
+               href="{{ $u }}"
+               {{- if partial "is-external.html" $u }} target="_blank"
+               rel="noopener"{{ end }}>
+              <span class="linkbtn__icon">
+                {{- partial "icon.html" (.icon | default (lower .name)) -}}
+              </span>
+              <span>{{ .name }}</span>
+              {{- with .note }}
+              <span class="linkbtn__note">{{ . }}</span>
+              {{- end }}
+            </a>
+          </li>
+          {{- end }}
+        </ul>
+      </div>
+    </article>
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

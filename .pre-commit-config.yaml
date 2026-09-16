@@ -1,0 +1,27 @@
+---
+exclude: '^public/'
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-added-large-files
+      - id: check-merge-conflict
+      - id: check-shebang-scripts-are-executable
+      - id: check-toml
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: local
+    hooks:
+      - id: site-checks
+        name: build site and check output
+        entry: tools/check-site.sh
+        language: script
+        pass_filenames: false
+        files: '^(assets|content|data|layouts|static|tools)/|^hugo\.toml$'
+
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply

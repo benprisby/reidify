@@ -1,0 +1,16 @@
+:root {
+  --bg: #07222E;
+  --surface: #0E3441;
+  --text: #EAF6FA;
+  --text-muted: #9FC9D6;
+  --link: #42C9F2;
+  --cta: #FFD633;
+  --cta-text: #1A1A1A;
+  --border: #23596B;
+
+  --accent: #29B6E8;       /* banner cyan, the hero field */
+  --accent-ink: #052430;   /* text on cyan, 6.88:1 */
+  --ink: #1A1A1A;          /* the outline */
+  --cta-shadow: #E8A81E;
+  --rule: #FFD633;         /* section underline */
+}

@@ -1,0 +1,26 @@
+{{- /* Off-site destinations only; the nav covers internal pages. The business
+       email is intentionally absent — Contact owns it. */ -}}
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <p class="footer__copy">&copy; {{ now.Year }} Reidify</p>
+    <ul class="footer__links">
+      <li>
+        <a href="{{ site.Params.youtube }}" target="_blank"
+           rel="noopener">YouTube</a>
+      </li>
+      <li>
+        <a href="{{ site.Params.twitch }}" target="_blank"
+           rel="noopener">Twitch</a>
+      </li>
+      <li>
+        <a href="{{ site.Params.tiktok }}" target="_blank"
+           rel="noopener">TikTok</a>
+      </li>
+      {{- with site.Params.shop }}
+      <li>
+        <a href="{{ . }}" target="_blank" rel="noopener">Merch</a>
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</footer>

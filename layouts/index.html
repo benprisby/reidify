@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "en-us" }}">
+<head>
+  {{- partial "head.html" . }}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  {{ partial "nav.html" . }}
+
+  <main id="main">
+    <section class="hero">
+      <div class="wrap">
+        <h1 class="display hero__title">{{ .Title }}</h1>
+        <p class="hero__tagline">{{ .Params.description }}</p>
+
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="{{ site.Params.youtube }}"
+             target="_blank" rel="noopener">Subscribe on YouTube</a>
+          {{- with site.Params.shop }}
+          <a class="btn btn--secondary" href="{{ . }}"
+             target="_blank" rel="noopener">Shop Merch</a>
+          {{- end }}
+        </div>
+      </div>
+    </section>
+
+    {{- /* Below the band: running text over a saturated field is a
+           readability tax with no payoff. */}}
+    <section class="intro">
+      <div class="wrap">
+        <div class="intro__body">{{ .Content }}</div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="latest">
+      <div class="wrap">
+        <div class="section__head">
+          <h2 class="section__title" id="latest">Latest Videos</h2>
+        </div>
+        {{ partial "video-grid.html" . }}
+        <p class="section__more" style="margin-top:1.75rem">
+          <a href="{{ site.Params.youtube }}/videos" target="_blank"
+             rel="noopener">See everything on YouTube</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>

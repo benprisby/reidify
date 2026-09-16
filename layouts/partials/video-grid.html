@@ -1,0 +1,37 @@
+{{- /* Renders data/videos.json. Thumbnails are hotlinked from i.ytimg.com so
+       they update without a rebuild. */ -}}
+{{- /* hugo.Data, not site.Data — the latter is deprecated as of
+       Hugo 0.156 and slated for removal. */ -}}
+{{- /* Already Shorts-free: the build pulls the UULF ("Videos") playlist
+       feed rather than the channel feed. */ -}}
+{{- $limit := site.Params.videoLimit | default 15 -}}
+{{- $videos := first $limit hugo.Data.videos -}}
+{{- with $videos }}
+<ul class="videos">
+  {{- range $i, $v := . }}
+  <li class="video">
+    <a href="{{ $v.url }}" target="_blank" rel="noopener">
+      <div class="video__thumb">
+        <img src="{{ $v.thumbnail }}" alt="" width="480" height="270"
+             {{ if lt $i 3 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }}
+             decoding="async" referrerpolicy="no-referrer">
+      </div>
+      <p class="video__title">{{ $v.title }}</p>
+      {{- with $v.published }}
+      <p class="video__date">
+        <time datetime="{{ . }}">
+          {{- (time.AsTime .).Format "2 January 2006" -}}
+        </time>
+      </p>
+      {{- end }}
+    </a>
+  </li>
+  {{- end }}
+</ul>
+{{- else }}
+<p class="videos__empty">
+  Video list is temporarily unavailable.
+  <a href="{{ site.Params.youtube }}" target="_blank"
+     rel="noopener">Watch on YouTube</a>.
+</p>
+{{- end }}

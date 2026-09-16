@@ -1,0 +1,5 @@
+{{- /* True for links that leave the site. Pair with:
+         target="_blank" rel="noopener"
+       noopener not noreferrer, and mailto:/tel: get neither. See CLAUDE.md. */ -}}
+{{- $u := . -}}
+{{- return or (hasPrefix $u "http://") (hasPrefix $u "https://") (hasPrefix $u "//") -}}

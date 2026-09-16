@@ -1,0 +1,36 @@
+baseURL = 'https://reidify.tv/'
+locale = 'en-us'
+title = 'Reidify'
+enableRobotsTXT = true
+
+# Five pages, no blog — these would generate routes nothing links to.
+disableKinds = ['taxonomy', 'term', 'rss']
+
+[params]
+  description = 'Lots of games. Lots of ridiculous ideas. Reidify sets up absurd situations in games to see how they go.'
+  channelID = 'UCE6h5SQHI8Xv3v_F7DZFtTA'
+  youtube = 'https://www.youtube.com/@Reidifyy'
+  twitch = 'https://www.twitch.tv/rwplive'
+  tiktok = 'https://www.tiktok.com/@Reidifyy'
+
+  # TODO: Restore once shop is live.
+  # shop = 'https://shop.reidify.tv'
+  email = 'business@reidify.tv'
+  videoLimit = 15
+
+[menus]
+  [[menus.main]]
+    name = 'About'
+    pageRef = '/about'
+    weight = 10
+  [[menus.main]]
+    name = 'Links'
+    pageRef = '/links'
+    weight = 20
+  [[menus.main]]
+    name = 'Contact'
+    pageRef = '/contact'
+    weight = 30
+
+[markup.goldmark.renderer]
+  unsafe = false

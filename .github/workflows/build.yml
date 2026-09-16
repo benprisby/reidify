@@ -1,0 +1,76 @@
+name: Build and Deploy Site
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '17 * * * *'
+  # Keep: GitHub disables cron after 60 days idle; this is the recovery path.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    name: Build Site
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.166.0
+      CHANNEL_ID: UCE6h5SQHI8Xv3v_F7DZFtTA
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          cd ${{ runner.temp }}
+          wget -O hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i hugo.deb
+          rm hugo.deb
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Set up Pages
+        id: pages
+        uses: actions/configure-pages@v5
+      - name: Refresh video feed
+        run: |
+          # UULF<suffix> is YouTube's auto-generated "Videos" playlist:
+          # long-form only, no Shorts. UUSH<suffix> is the Shorts equivalent.
+          PLAYLIST_ID="UULF${CHANNEL_ID#UC}"
+          curl -sSfL --max-time 30 --retry 3 --retry-delay 5 -o /tmp/feed.xml \
+            "https://www.youtube.com/feeds/videos.xml?playlist_id=${PLAYLIST_ID}"
+          python3 .github/scripts/feed-to-json.py /tmp/feed.xml data/videos.json
+      - name: Build with Hugo
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
+        run: hugo --minify --gc --baseURL "${{ steps.pages.outputs.base_url }}/"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ./public
+
+  deploy:
+    name: Deploy Site
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

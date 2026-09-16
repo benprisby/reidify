@@ -1,0 +1,9 @@
+{{- /* Applies the same target/rel rule to links written in Markdown.
+       The trailing {{- -}} matters: without it a newline at end of file renders
+       as a space before any punctuation following an inline link. */ -}}
+{{- $ext := partial "is-external.html" .Destination -}}
+<a href="{{ .Destination | safeURL }}"
+   {{- with .Title }} title="{{ . }}"{{ end }}
+   {{- if $ext }} target="_blank" rel="noopener"{{ end -}}
+>{{ .Text }}</a>
+{{- /**/ -}}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale | default "en-us" }}">
+<head>
+  {{- partial "head.html" . }}
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  {{ partial "nav.html" . }}
+
+  <main id="main">
+    <article class="page">
+      <div class="wrap">
+        <h1 class="page__title">{{ .Title }}</h1>
+        <div class="prose">{{ .Content }}</div>
+      </div>
+    </article>
+  </main>
+
+  {{ partial "footer.html" . }}
+</body>
+</html>
