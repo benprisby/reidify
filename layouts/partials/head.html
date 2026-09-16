@@ -42,8 +42,12 @@
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{- end -}}
 
+{{- /* favicon.ico first and unconditionally: Safari falls back to /favicon.ico
+       and caches a 404 there hard. The PNG is the higher-resolution option for
+       browsers that prefer it. */}}
+<link rel="icon" href="{{ "/favicon.ico" | relURL }}" sizes="32x32">
 {{- with resources.Get "img/logo.png" }}
-<link rel="icon" href="{{ .RelPermalink }}" type="image/png">
+<link rel="icon" href="{{ .RelPermalink }}" type="image/png" sizes="128x128">
 {{- end }}
 {{- /* iOS ignores SVG favicons for Add to Home Screen and would otherwise use
        a screenshot of the page. Opaque and square-cornered on purpose — iOS

@@ -238,6 +238,8 @@ python3 -c "..."                 # extract base64 <image> payloads
 magick rgb.png mask.png -alpha off -compose CopyOpacity -composite rgba.png
 
 magick rgba.png -resize 128x128 -strip PNG32:assets/img/logo.png
+magick assets/img/logo-512.png -background none \
+  -define icon:auto-resize=48,32,16 static/favicon.ico
 magick rgba.png -resize 180x180 -background '#29C2D5' -alpha remove -alpha off \
   -strip static/apple-touch-icon.png
 ```
