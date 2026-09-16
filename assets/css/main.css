@@ -463,8 +463,15 @@ a:hover { color: var(--text); }
   padding: 0;
   flex-wrap: wrap;
 }
-.footer a { color: var(--text-muted); text-decoration: none; }
-.footer a:hover { color: var(--link); text-decoration: underline; }
+/* Underlined, not just coloured. --link against --text-muted is 1.09:1, so
+   colour alone would not distinguish a link from the text around it. */
+.footer a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.footer a:hover { color: var(--link); }
 
 /* --- 404 ------------------------------------------------------------------ */
 
