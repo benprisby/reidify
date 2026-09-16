@@ -1,0 +1,32 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "git-submodules": {
+    "enabled": true
+  },
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Update Hugo version in workflow",
+      "managerFilePatterns": [
+        "/^\\.github/workflows/hugo\\.yaml$/"
+      ],
+      "matchStrings": [
+        "HUGO_VERSION:\\s*(?<currentValue>.*?)\\s"
+      ],
+      "datasourceTemplate": "github-releases",
+      "packageNameTemplate": "gohugoio/hugo",
+      "extractVersionTemplate": "^v(?<version>.*)$"
+    }
+  ],
+  "packageRules": [
+    {
+      "matchManagers": [
+        "html"
+      ],
+      "enabled": false
+    }
+  ]
+}
