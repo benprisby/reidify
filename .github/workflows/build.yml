@@ -4,10 +4,14 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '17 * * * *'
-  # Keep: GitHub disables cron after 60 days idle; this is the recovery path.
+  # The hourly feed refresh is driven by the self-hosted Dkron cluster.
   workflow_dispatch:
+    inputs:
+      triggered_by:
+        description: Set by automated callers to identify the trigger source
+        required: false
+        default: manual
+        type: string
 
 permissions:
   contents: read
