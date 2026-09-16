@@ -48,7 +48,7 @@ jobs:
           python-version: '3.14'
       - name: Set up Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Refresh video feed
         run: |
           # UULF<suffix> is YouTube's auto-generated "Videos" playlist:
