@@ -440,7 +440,7 @@ a:hover { color: var(--text); }
   margin-top: clamp(2rem, 6vw, 4rem);
   padding-block: 2rem 2.5rem;
   color: var(--text-muted);
-  font-size: 0.9375rem;
+  font-size: 0.8125rem;
 }
 .footer__inner {
   display: flex;
@@ -450,6 +450,11 @@ a:hover { color: var(--text); }
   flex-wrap: wrap;
 }
 .footer__copy { margin: 0; }
+/* Decorative, so aria-hidden in the markup and no contrast obligation. */
+.footer__sep {
+  margin: 0 0.35rem;
+  opacity: 0.5;
+}
 .footer__links {
   display: flex;
   gap: 1.25rem;

@@ -2,7 +2,12 @@
        email is intentionally absent — Contact owns it. */ -}}
 <footer class="footer">
   <div class="wrap footer__inner">
-    <p class="footer__copy">&copy; {{ now.Year }} Reidify</p>
+    <p class="footer__copy">
+      &copy; {{ now.Year }} Reidify
+      <span class="footer__sep" aria-hidden="true">|</span>
+      Site by <a href="https://benprisby.com" target="_blank"
+                 rel="noopener">Ben Prisby</a>
+    </p>
     <ul class="footer__links">
       <li>
         <a href="{{ site.Params.youtube }}" target="_blank"
